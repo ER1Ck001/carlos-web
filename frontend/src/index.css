@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow-condensed/500.css';
+@import '@fontsource/barlow-condensed/600.css';
+@import '@fontsource/barlow-condensed/700.css';
+
+@theme {
+  --font-sans: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Barlow Condensed', 'Barlow', ui-sans-serif, sans-serif;
+
+  --color-base: #0e0e10;
+  --color-surface: #17171a;
+  --color-raised: #1f1f23;
+  --color-line: #2a2a30;
+  --color-line-strong: #3a3a42;
+  --color-ink: #f2f2f3;
+  --color-muted: #9a9aa3;
+  --color-faint: #6b6b74;
+  --color-brand: #e11d2e;
+  --color-brand-hover: #f0303f;
+  --color-brand-soft: #e11d2e1f;
+  --color-ok: #22c55e;
+  --color-warn: #f5a524;
+  --color-info: #60a5fa;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-base text-ink font-sans antialiased;
+    font-size: 15px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(0.75);
+    cursor: pointer;
+  }
+  /* números alinhados em tabelas e indicadores */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animar-entrada {
+  animation: subir 0.18s ease-out;
+}
+
+/* barra de rolagem discreta */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a42 transparent;
+}
