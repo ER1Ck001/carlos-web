@@ -34,11 +34,11 @@ interface Dashboard {
   };
 }
 
-const eixo = { fill: '#6b6b74', fontSize: 12, fontFamily: 'Barlow' };
+const eixo = { fill: '#8a93a3', fontSize: 12, fontFamily: 'Inter' };
 const tooltipStyle = {
-  contentStyle: { background: '#1f1f23', border: '1px solid #3a3a42', borderRadius: 8, fontFamily: 'Barlow', fontSize: 13 },
-  labelStyle: { color: '#f2f2f3', marginBottom: 4 },
-  cursor: { fill: '#ffffff08' },
+  contentStyle: { background: '#ffffff', border: '1px solid #e6e9ef', borderRadius: 8, fontFamily: 'Inter', fontSize: 13 },
+  labelStyle: { color: '#111a2b', marginBottom: 4 },
+  cursor: { fill: '#111a2b0a' },
 };
 
 /** Indicador grande, no estilo de um painel de instrumentos. */
@@ -98,7 +98,7 @@ export default function Dashboard() {
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={dados.vendas_por_mes} margin={{ top: 8, right: 4, left: -8, bottom: 0 }}>
-                <CartesianGrid vertical={false} stroke="#2a2a30" />
+                <CartesianGrid vertical={false} stroke="#e6e9ef" />
                 <XAxis dataKey="mes" tickFormatter={mesCurto} tick={eixo} axisLine={false} tickLine={false} />
                 <YAxis tickFormatter={(v) => moedaCompacta(v)} tick={eixo} axisLine={false} tickLine={false} width={76} />
                 <Tooltip
@@ -106,7 +106,7 @@ export default function Dashboard() {
                   labelFormatter={(l) => mesCurto(String(l))}
                   formatter={(v, _n, item) => [`${moeda(Number(v))} (${item.payload.quantidade} venda${item.payload.quantidade === 1 ? '' : 's'})`, 'Faturamento']}
                 />
-                <Bar animationDuration={500} dataKey="valor" fill="#e11d2e" radius={[4, 4, 0, 0]} maxBarSize={36} />
+                <Bar animationDuration={500} dataKey="valor" fill="#d33632" radius={[4, 4, 0, 0]} maxBarSize={36} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -156,13 +156,13 @@ export default function Dashboard() {
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={financeiro.fluxo_mensal} margin={{ top: 4, right: 4, left: -8, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="#2a2a30" />
+                  <CartesianGrid vertical={false} stroke="#e6e9ef" />
                   <XAxis dataKey="mes" tickFormatter={mesCurto} tick={eixo} axisLine={false} tickLine={false} />
                   <YAxis tickFormatter={(v) => moedaCompacta(v)} tick={eixo} axisLine={false} tickLine={false} width={76} />
                   <Tooltip {...tooltipStyle} labelFormatter={(l) => mesCurto(String(l))} formatter={(v, n) => [moeda(Number(v)), n]} />
-                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 13, color: '#9a9aa3' }} />
-                  <Bar animationDuration={500} dataKey="receitas" name="Receitas" fill="#22c55e" radius={[3, 3, 0, 0]} maxBarSize={22} />
-                  <Bar animationDuration={500} dataKey="despesas" name="Despesas" fill="#e11d2e" radius={[3, 3, 0, 0]} maxBarSize={22} />
+                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 13, color: '#525d6f' }} />
+                  <Bar animationDuration={500} dataKey="receitas" name="Receitas" fill="#16a34a" radius={[3, 3, 0, 0]} maxBarSize={22} />
+                  <Bar animationDuration={500} dataKey="despesas" name="Despesas" fill="#d33632" radius={[3, 3, 0, 0]} maxBarSize={22} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

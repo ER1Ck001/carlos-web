@@ -133,16 +133,16 @@ export default function Relatorios() {
                 <div style={{ height: Math.max(180, v.por_marca.length * 44) }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={v.por_marca} layout="vertical" margin={{ top: 0, right: 16, left: 0, bottom: 0 }}>
-                      <CartesianGrid horizontal={false} stroke="#2a2a30" />
-                      <XAxis type="number" tickFormatter={(x) => moedaCompacta(x)} tick={{ fill: '#6b6b74', fontSize: 12 }} axisLine={false} tickLine={false} />
-                      <YAxis type="category" dataKey="marca" tick={{ fill: '#f2f2f3', fontSize: 13 }} axisLine={false} tickLine={false} width={96} />
+                      <CartesianGrid horizontal={false} stroke="#e6e9ef" />
+                      <XAxis type="number" tickFormatter={(x) => moedaCompacta(x)} tick={{ fill: '#8a93a3', fontSize: 12 }} axisLine={false} tickLine={false} />
+                      <YAxis type="category" dataKey="marca" tick={{ fill: '#111a2b', fontSize: 13 }} axisLine={false} tickLine={false} width={96} />
                       <Tooltip
-                        contentStyle={{ background: '#1f1f23', border: '1px solid #3a3a42', borderRadius: 8, fontSize: 13 }}
-                        labelStyle={{ color: '#f2f2f3' }}
-                        cursor={{ fill: '#ffffff08' }}
+                        contentStyle={{ background: '#ffffff', border: '1px solid #e6e9ef', borderRadius: 8, fontSize: 13 }}
+                        labelStyle={{ color: '#111a2b' }}
+                        cursor={{ fill: '#111a2b0a' }}
                         formatter={(x, _n, item) => [`${moeda(Number(x))} (${item.payload.quantidade} venda${item.payload.quantidade === 1 ? '' : 's'})`, 'Faturamento']}
                       />
-                      <Bar animationDuration={500} dataKey="faturamento" fill="#e11d2e" radius={[0, 4, 4, 0]} maxBarSize={22} />
+                      <Bar animationDuration={500} dataKey="faturamento" fill="#d33632" radius={[0, 4, 4, 0]} maxBarSize={22} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -152,7 +152,7 @@ export default function Relatorios() {
         </div>
       )}
 
-      <h2 className="font-display text-2xl font-semibold tracking-wide mt-10 mb-4">Estoque atual</h2>
+      <h2 className="font-display text-2xl font-semibold mt-10 mb-4">Estoque atual</h2>
       {estoque.carregando && !estoque.dados ? (
         <Carregando />
       ) : estoque.erro || !estoque.dados ? (

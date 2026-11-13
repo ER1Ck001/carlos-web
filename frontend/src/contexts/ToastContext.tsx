@@ -33,7 +33,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={t.id}
             role={t.tipo === 'erro' ? 'alert' : 'status'}
-            className={`animar-entrada flex items-start gap-3 rounded-lg border px-4 py-3 shadow-2xl shadow-black/50 bg-raised ${
+            className={`animar-entrada flex items-start gap-3 rounded-lg border px-4 py-3 shadow-xl shadow-navy/10 bg-surface ${
               t.tipo === 'erro' ? 'border-brand/60' : 'border-ok/40'
             }`}
           >

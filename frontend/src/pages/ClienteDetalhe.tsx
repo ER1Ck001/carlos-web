@@ -45,7 +45,7 @@ export default function ClienteDetalhe() {
       </Link>
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6">
         <div>
-          <h1 className="font-display text-3xl sm:text-4xl font-semibold tracking-wide leading-none">{c.nome}</h1>
+          <h1 className="font-display text-3xl sm:text-4xl font-semibold leading-none">{c.nome}</h1>
           <p className="text-muted mt-2 text-sm">
             Cliente desde {data(c.data_cadastro)} · {c.compras.length} compra(s)
           </p>

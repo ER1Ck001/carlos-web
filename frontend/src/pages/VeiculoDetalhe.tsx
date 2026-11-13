@@ -50,7 +50,7 @@ export default function VeiculoDetalhe() {
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="font-display text-3xl sm:text-4xl font-semibold tracking-wide leading-none">
+            <h1 className="font-display text-3xl sm:text-4xl font-semibold leading-none">
               {v.marca} {v.modelo}
             </h1>
             <Badge valor={v.status} rotulo={STATUS_VEICULO[v.status]} />

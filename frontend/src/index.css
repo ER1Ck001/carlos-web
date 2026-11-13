@@ -1,46 +1,54 @@
 @import 'tailwindcss';
-@import '@fontsource/barlow/400.css';
-@import '@fontsource/barlow/500.css';
-@import '@fontsource/barlow/600.css';
-@import '@fontsource/barlow-condensed/500.css';
-@import '@fontsource/barlow-condensed/600.css';
-@import '@fontsource/barlow-condensed/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/poppins/800.css';
 
 @theme {
-  --font-sans: 'Barlow', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Barlow Condensed', 'Barlow', ui-sans-serif, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Poppins', 'Inter', ui-sans-serif, sans-serif;
 
-  --color-base: #0e0e10;
-  --color-surface: #17171a;
-  --color-raised: #1f1f23;
-  --color-line: #2a2a30;
-  --color-line-strong: #3a3a42;
-  --color-ink: #f2f2f3;
-  --color-muted: #9a9aa3;
-  --color-faint: #6b6b74;
-  --color-brand: #e11d2e;
-  --color-brand-hover: #f0303f;
-  --color-brand-soft: #e11d2e1f;
-  --color-ok: #22c55e;
-  --color-warn: #f5a524;
-  --color-info: #60a5fa;
+  --color-base: #f4f5f8;
+  --color-surface: #ffffff;
+  --color-raised: #f1f3f7;
+  --color-line: #e6e9ef;
+  --color-line-strong: #d4d9e2;
+  --color-ink: #111a2b;
+  --color-muted: #525d6f;
+  --color-faint: #8a93a3;
+  --color-brand: #d33632;
+  --color-brand-hover: #b72b27;
+  --color-brand-soft: #d336321a;
+  --color-navy: #111a2b;
+  --color-navy-2: #1b2638;
+  --color-ok: #16a34a;
+  --color-warn: #d97706;
+  --color-info: #2563eb;
+
+  --shadow-card: 0 1px 2px rgb(17 26 43 / 0.04), 0 4px 16px rgb(17 26 43 / 0.05);
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     @apply bg-base text-ink font-sans antialiased;
     font-size: 15px;
+  }
+  h1, h2, h3, .font-display {
+    letter-spacing: -0.015em;
   }
   :focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 2px;
   }
   input[type='date']::-webkit-calendar-picker-indicator {
-    filter: invert(0.75);
     cursor: pointer;
+    opacity: 0.6;
   }
   /* números alinhados em tabelas e indicadores */
   .tabular {
@@ -74,5 +82,16 @@
 /* barra de rolagem discreta */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3a3a42 transparent;
+  scrollbar-color: #c9cfd9 transparent;
 }
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.surgir { animation: surgir 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes zoom-lento {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+.zoom-lento { animation: zoom-lento 14s ease-out both; }

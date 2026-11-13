@@ -16,8 +16,8 @@ export const cx = (...c: (string | false | null | undefined)[]) => c.filter(Bool
 // ------------------------------------------------------------------ Botão
 type Variante = 'primario' | 'secundario' | 'fantasma' | 'perigo';
 const VARIANTES: Record<Variante, string> = {
-  primario: 'bg-brand text-white hover:bg-brand-hover',
-  secundario: 'bg-raised text-ink border border-line-strong hover:border-faint',
+  primario: 'bg-brand text-white hover:bg-brand-hover shadow-sm shadow-brand/25',
+  secundario: 'bg-surface text-ink border border-line-strong hover:border-faint hover:bg-raised',
   fantasma: 'text-muted hover:text-ink hover:bg-raised',
   perigo: 'bg-transparent text-brand border border-brand/50 hover:bg-brand-soft',
 };
@@ -35,7 +35,7 @@ export function Botao({ variante = 'primario', carregando, icone, tamanho = 'md'
       {...p}
       disabled={disabled || carregando}
       className={cx(
-        'inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors whitespace-nowrap',
+        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors whitespace-nowrap',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         tamanho === 'md' ? 'h-10 px-4 text-sm' : 'h-8 px-3 text-[13px]',
         VARIANTES[variante],
@@ -53,8 +53,8 @@ export function Botao({ variante = 'primario', carregando, icone, tamanho = 'md'
 const largura = (className?: string) => (className && /(^|\s)w-/.test(className) ? '' : 'w-full');
 
 const baseCampo =
-  'h-10 rounded-md bg-base border border-line-strong px-3 text-sm text-ink placeholder:text-faint ' +
-  'focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand disabled:opacity-60';
+  'h-10 rounded-lg bg-surface border border-line-strong px-3 text-sm text-ink placeholder:text-faint ' +
+  'focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition-shadow disabled:opacity-60';
 
 interface CampoProps {
   rotulo: string;
@@ -147,10 +147,10 @@ export function Badge({ valor, rotulo }: { valor: string; rotulo?: string }) {
 // ------------------------------------------------------------------ Estrutura
 export function Painel({ titulo, acao, children, className, semPadding }: { titulo?: ReactNode; acao?: ReactNode; children: ReactNode; className?: string; semPadding?: boolean }) {
   return (
-    <section className={cx('rounded-xl bg-surface border border-line', className)}>
+    <section className={cx('rounded-2xl bg-surface border border-line shadow-card', className)}>
       {(titulo || acao) && (
         <header className="flex items-center justify-between gap-3 px-5 pt-4 pb-3">
-          {titulo && <h2 className="font-display text-lg font-semibold tracking-wide">{titulo}</h2>}
+          {titulo && <h2 className="font-display text-lg font-semibold">{titulo}</h2>}
           {acao}
         </header>
       )}
@@ -163,7 +163,7 @@ export function Cabecalho({ titulo, descricao, acoes }: { titulo: string; descri
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-6">
       <div>
-        <h1 className="font-display text-3xl sm:text-[34px] font-semibold leading-none tracking-wide">{titulo}</h1>
+        <h1 className="font-display text-3xl sm:text-[34px] font-semibold leading-none">{titulo}</h1>
         {descricao && <p className="text-muted mt-2 text-sm">{descricao}</p>}
       </div>
       {acoes && <div className="flex flex-wrap gap-2">{acoes}</div>}
@@ -213,7 +213,7 @@ export function Tabela({ children }: { children: ReactNode }) {
   );
 }
 export const Th = ({ children, className }: { children?: ReactNode; className?: string }) => (
-  <th className={cx('text-left font-medium text-faint text-xs px-4 py-3 border-b border-line whitespace-nowrap', className)}>
+  <th className={cx('text-left font-semibold uppercase tracking-wider text-faint text-[11px] px-4 py-3 bg-raised/60 border-b border-line whitespace-nowrap', className)}>
     {children}
   </th>
 );
@@ -287,20 +287,20 @@ export function Modal({
   if (!aberto) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" onClick={fechar} aria-hidden />
+      <div className="absolute inset-0 bg-navy/50 backdrop-blur-sm" onClick={fechar} aria-hidden />
       <div
         ref={ref}
         role="dialog"
         aria-modal="true"
         aria-label={titulo}
         className={cx(
-          'animar-entrada relative w-full bg-surface border border-line-strong rounded-t-2xl sm:rounded-xl shadow-2xl shadow-black/60',
+          'animar-entrada relative w-full bg-surface border border-line-strong rounded-t-2xl sm:rounded-2xl shadow-2xl shadow-navy/30',
           'max-h-[92vh] flex flex-col',
           largura,
         )}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-line">
-          <h2 className="font-display text-xl font-semibold tracking-wide">{titulo}</h2>
+          <h2 className="font-display text-xl font-semibold">{titulo}</h2>
           <button data-fechar onClick={fechar} className="text-muted hover:text-ink p-1 rounded" aria-label="Fechar">
             <X className="size-5" />
           </button>

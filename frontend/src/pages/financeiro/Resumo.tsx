@@ -15,7 +15,7 @@ interface Resumo {
   mensal: { mes: string; entradas: number; saidas: number }[];
 }
 
-const eixo = { fill: '#6b6b74', fontSize: 12, fontFamily: 'Barlow' };
+const eixo = { fill: '#8a93a3', fontSize: 12, fontFamily: 'Inter' };
 
 function Numero({ rotulo, valor, cor, detalhe }: { rotulo: string; valor: number; cor?: string; detalhe?: string }) {
   return (
@@ -56,19 +56,19 @@ export default function Resumo({ periodo }: { periodo: Periodo }) {
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={r.mensal} margin={{ top: 4, right: 4, left: -8, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="#2a2a30" />
+                  <CartesianGrid vertical={false} stroke="#e6e9ef" />
                   <XAxis dataKey="mes" tickFormatter={mesCurto} tick={eixo} axisLine={false} tickLine={false} />
                   <YAxis tickFormatter={(v) => moedaCompacta(v)} tick={eixo} axisLine={false} tickLine={false} width={76} />
                   <Tooltip
-                    contentStyle={{ background: '#1f1f23', border: '1px solid #3a3a42', borderRadius: 8, fontFamily: 'Barlow', fontSize: 13 }}
-                    labelStyle={{ color: '#f2f2f3' }}
-                    cursor={{ fill: '#ffffff08' }}
+                    contentStyle={{ background: '#ffffff', border: '1px solid #e6e9ef', borderRadius: 8, fontFamily: 'Inter', fontSize: 13 }}
+                    labelStyle={{ color: '#111a2b' }}
+                    cursor={{ fill: '#111a2b0a' }}
                     labelFormatter={(l) => mesCurto(String(l))}
                     formatter={(v, n) => [moeda(Number(v)), n]}
                   />
-                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 13, color: '#9a9aa3' }} />
-                  <Bar animationDuration={500} dataKey="entradas" name="Entradas" fill="#22c55e" radius={[3, 3, 0, 0]} maxBarSize={24} />
-                  <Bar animationDuration={500} dataKey="saidas" name="Saídas" fill="#e11d2e" radius={[3, 3, 0, 0]} maxBarSize={24} />
+                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 13, color: '#525d6f' }} />
+                  <Bar animationDuration={500} dataKey="entradas" name="Entradas" fill="#16a34a" radius={[3, 3, 0, 0]} maxBarSize={24} />
+                  <Bar animationDuration={500} dataKey="saidas" name="Saídas" fill="#d33632" radius={[3, 3, 0, 0]} maxBarSize={24} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

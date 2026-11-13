@@ -46,7 +46,7 @@ export default function VendaDetalhe() {
         <ArrowLeft className="size-4" /> Vendas
       </Link>
       <div className="mb-6">
-        <h1 className="font-display text-3xl sm:text-4xl font-semibold tracking-wide leading-none">Venda #{v.id}</h1>
+        <h1 className="font-display text-3xl sm:text-4xl font-semibold leading-none">Venda #{v.id}</h1>
         <p className="text-muted mt-2 text-sm">
           {dataHora(v.data_venda)} · vendido por {v.vendedor_nome}
         </p>
