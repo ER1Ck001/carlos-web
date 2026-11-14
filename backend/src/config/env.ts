@@ -39,12 +39,16 @@ const schema = z.object({
 
 const parsed = schema.safeParse(process.env);
 
+/** Problemas de configuração encontrados (vazio quando está tudo certo). */
+export const errosConfig: string[] = parsed.success
+  ? []
+  : parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`);
+
 if (!parsed.success) {
   console.error('\n[config] Variáveis de ambiente inválidas. Confira backend/.env (modelo em .env.example):');
-  for (const issue of parsed.error.issues) {
-    console.error(`  - ${issue.path.join('.')}: ${issue.message}`);
-  }
-  process.exit(1);
+  for (const erro of errosConfig) console.error(`  - ${erro}`);
+  // Na Vercel não derruba a função: a API responde 503 explicando o que falta (ver app.ts).
+  if (!process.env.VERCEL) process.exit(1);
 }
 
-export const env = parsed.data;
+export const env = parsed.success ? parsed.data : ({ ...process.env } as unknown as z.infer<typeof schema>);

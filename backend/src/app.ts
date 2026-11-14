@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { env } from './config/env.js';
+import { env, errosConfig } from './config/env.js';
 import { verificarBancos } from './config/database.js';
 import { autenticar } from './middlewares/auth.js';
 import { tratarErros } from './middlewares/erros.js';
@@ -20,6 +20,18 @@ import { relatoriosRoutes } from './modules/relatorios/relatorios.routes.js';
 export function criarApp() {
   const app = express();
   app.disable('x-powered-by');
+
+  // Sem as variáveis de ambiente obrigatórias, explica o problema em vez de falhar sem mensagem.
+  if (errosConfig.length > 0) {
+    app.use((_req, res) => {
+      res.status(503).json({
+        erro: 'O servidor não está configurado. Defina as variáveis de ambiente no painel da Vercel.',
+        detalhes: errosConfig,
+      });
+    });
+    return app;
+  }
+
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cors({ origin: env.CORS_ORIGIN.split(',').map((o) => o.trim()) }));
   app.use(express.json({ limit: '200kb' }));
