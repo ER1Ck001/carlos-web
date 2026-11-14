@@ -19,7 +19,10 @@ const base: PoolOptions = {
   user: env.DB_USER,
   password: env.DB_PASSWORD,
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: env.DB_CONNECTION_LIMIT,
+  ssl: env.DB_SSL
+    ? { rejectUnauthorized: true, ...(env.DB_SSL_CA ? { ca: env.DB_SSL_CA.replace(/\\n/g, '\n') } : {}) }
+    : undefined,
   dateStrings: true, // DATE/DATETIME chegam como texto, sem conversão de fuso
   decimalNumbers: true, // DECIMAL chega como number
   charset: 'utf8mb4',

@@ -22,6 +22,14 @@ const schema = z.object({
   DB_PASSWORD: z.string().default(''),
   DB_CONCESSIONARIA: identificador.default('concessionaria_db'),
   DB_FINANCEIRO: identificador.default('financeiro_db'),
+  // MySQL na nuvem normalmente exige SSL. DB_SSL_CA aceita o certificado (PEM) do provedor, se ele pedir.
+  DB_SSL: z
+    .enum(['true', 'false'])
+    .default('false')
+    .transform((v) => v === 'true'),
+  DB_SSL_CA: z.string().optional(),
+  // Na Vercel cada instância abre suas próprias conexões, então o padrão lá é menor.
+  DB_CONNECTION_LIMIT: z.coerce.number().int().positive().default(process.env.VERCEL ? 3 : 10),
 
   JWT_SECRET: z.string({ error: 'obrigatório (texto secreto com 16+ caracteres)' }).min(16, 'deve ter pelo menos 16 caracteres'),
   JWT_EXPIRES_IN: z.string().default('8h'),
