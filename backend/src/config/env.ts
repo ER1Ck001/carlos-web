@@ -3,9 +3,11 @@ import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
 import { z } from 'zod';
 
-const here = path.dirname(fileURLToPath(import.meta.url));
-// backend/.env (funciona tanto em src/ quanto em dist/)
-dotenv.config({ path: path.resolve(here, '../../.env'), quiet: true });
+// backend/.env (funciona tanto em src/ quanto em dist/). Na Vercel as variáveis vêm do painel.
+if (!process.env.VERCEL) {
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  dotenv.config({ path: path.resolve(here, '../../.env'), quiet: true });
+}
 
 const identificador = z
   .string()

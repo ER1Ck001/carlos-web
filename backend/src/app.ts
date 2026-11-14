@@ -64,11 +64,14 @@ export function criarApp() {
   });
 
   // Se o frontend já foi compilado (npm run build no frontend), o backend também o serve.
-  const here = path.dirname(fileURLToPath(import.meta.url));
-  const dist = path.resolve(here, '../../frontend/dist');
-  if (fs.existsSync(path.join(dist, 'index.html'))) {
-    app.use(express.static(dist));
-    app.get(/^(?!\/api).*/, (_req, res) => res.sendFile(path.join(dist, 'index.html')));
+  // Na Vercel o frontend é um service separado, então isso fica desligado lá.
+  if (!process.env.VERCEL) {
+    const here = path.dirname(fileURLToPath(import.meta.url));
+    const dist = path.resolve(here, '../../frontend/dist');
+    if (fs.existsSync(path.join(dist, 'index.html'))) {
+      app.use(express.static(dist));
+      app.get(/^(?!\/api).*/, (_req, res) => res.sendFile(path.join(dist, 'index.html')));
+    }
   }
 
   app.use(tratarErros);
